@@ -154,9 +154,19 @@ class Adafruit_SSD1306 : public Adafruit_GFX {
   void invertDisplay(uint8_t i);
   void display();
 
+  void startscrollright(uint8_t start, uint8_t stop);
+  void startscrollleft(uint8_t start, uint8_t stop);
+
+  void startscrolldiagright(uint8_t start, uint8_t stop);
+  void startscrolldiagleft(uint8_t start, uint8_t stop);
+  void stopscroll(void);
+
   void dim(boolean dim);
 
   void drawPixel(int16_t x, int16_t y, uint16_t color);
+
+  virtual void drawFastVLine(int16_t x, int16_t y, int16_t h, uint16_t color);
+  virtual void drawFastHLine(int16_t x, int16_t y, int16_t w, uint16_t color);
 
  private:
   int8_t _i2caddr, _vccstate, sid, sclk, dc, rst, cs;
@@ -168,6 +178,8 @@ class Adafruit_SSD1306 : public Adafruit_GFX {
   PortMask mosipinmask, clkpinmask, cspinmask, dcpinmask;
 #endif
 
+  inline void drawFastVLineInternal(int16_t x, int16_t y, int16_t h, uint16_t color) __attribute__((always_inline));
+  inline void drawFastHLineInternal(int16_t x, int16_t y, int16_t w, uint16_t color) __attribute__((always_inline));
 
 };
 
